@@ -7,6 +7,9 @@ let snakeX = 5,
 let velocityX = 0,
   velocityY = 0;
 
+//new array
+let snakeBody = [];
+
 //function to make food appear randomly
 const changeFoodPosition = () => {
   foodX = Math.floor(Math.random() * 30) + 1;
@@ -22,13 +25,28 @@ const initGame = () => {
   //if condition is true change position of new fruit
   if (snakeX === foodX && snakeY === foodY) {
     changeFoodPosition();
+
+    //to add elements to the snake
+    snakeBody.push([foodX, foodY]);
+    //console.log(snakeBody);
   }
+
+  //add element to snakeBody
+  for (let i = snakeBody.length - 1; i > 0; i--) {
+    snakeBody[i] = snakeBody[i - 1];
+  }
+
+  //coordinates for snakeBody
+  snakeBody[0] = [snakeX, snakeY];
 
   //position of snake changes according to key pressed
   snakeX += velocityX;
   snakeY += velocityY;
 
-  htmlMarkup += `<div class="head" style="grid-area: ${snakeY} / ${snakeX}"></div>`;
+  //to create element for snake after eating fruit
+  for (let index = 0; index < snakeBody.length; index++) {
+    htmlMarkup += `<div class="head" style="grid-area: ${snakeBody[index][1]} / ${snakeBody[index][0]}"></div>`;
+  }
   playBoard.innerHTML = htmlMarkup;
 };
 
