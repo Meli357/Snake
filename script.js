@@ -59,6 +59,14 @@ const initGame = () => {
   //to create element for snake after eating fruit
   for (let index = 0; index < snakeBody.length; index++) {
     htmlMarkup += `<div class="head" style="grid-area: ${snakeBody[index][1]} / ${snakeBody[index][0]}"></div>`;
+    //checks if snake hits body
+    if (
+      index !== 0 &&
+      snakeBody[0][1] === snakeBody[index][1] &&
+      snakeBody[0][0] === snakeBody[index][0]
+    ) {
+      gameOver = true;
+    }
   }
   playBoard.innerHTML = htmlMarkup;
 };
@@ -66,7 +74,7 @@ const initGame = () => {
 //shows alert and refreshes page if snake touches border
 const handleGameOver = () => {
   clearInterval(setIntervalId);
-  alert("Game Over!");
+  alert("Game Over! :(");
   location.reload();
 };
 
