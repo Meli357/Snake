@@ -1,5 +1,8 @@
 let playBoard = document.querySelector(".play-board");
 
+const scoreElement = document.querySelector(".score");
+const highScoreElement = document.querySelector(".high-score");
+
 //create variables that will change its value
 
 let gameOver = false;
@@ -11,6 +14,13 @@ let velocityX = 0,
   velocityY = 0;
 
 let setIntervalId;
+
+let score = 0;
+
+//to store max score
+let highScore = localStorage.getItem("high-score") || 0;
+//to show highsScore
+highScoreElement.innerHTML = `High score : ${highScore}`;
 
 //new array
 let snakeBody = [];
@@ -36,6 +46,17 @@ const initGame = () => {
 
     //to add elements to the snake
     snakeBody.push([foodX, foodY]);
+
+    score++;
+
+    //ternary condition to show high score
+    highScore = score >= highScore ? score : highScore;
+    //store value so that it will update score
+    localStorage.setItem("high-score", highScore);
+
+    //show both scores
+    scoreElement.innerHTML = `Score : ${score}`;
+    highScoreElement.innerHTML = `High score : ${highScore}`;
     //console.log(snakeBody);
   }
 
