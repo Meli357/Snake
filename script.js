@@ -55,7 +55,7 @@ const initGame = () => {
     localStorage.setItem("high-score", highScore);
 
     //show both scores
-    scoreElement.innerHTML = `Score : ${score}`;
+    scoreElement.innerHTML = `🍐 : ${score}`;
     highScoreElement.innerHTML = `High score : ${highScore}`;
     //console.log(snakeBody);
   }
@@ -95,7 +95,7 @@ const initGame = () => {
 //shows alert and refreshes page if snake touches border
 const handleGameOver = () => {
   clearInterval(setIntervalId);
-  alert("Game Over! :(");
+  alert("Game Over! 😭 Press OK to restart");
   location.reload();
 };
 
